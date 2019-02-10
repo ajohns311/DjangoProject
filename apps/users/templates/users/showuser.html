@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'books/css/main.css' %}">
+  <title>User</title>
+</head>
+<body>
+  <div class="jumbotron">
+    <nav class = "navbar navbar-light bg-light">
+      <a class = "navbar-nav mr-auto" href = "{% url 'books:index' %}">Home</a>
+      <a class = "navbar-nav ml-auto" href = "{% url 'books:add' %}"><button class="btn btn-primary">Add Book and Review</button></a>
+    </nav>
+    <br>
+    <h4>User: {{ user_username }}</h4>
+    <h4>Name: {{ user_first_name }} {{ user_last_name }}</h4>
+    <h4>Email: {{ user_email }}</h4>
+    <br>
+    <h5>Reviewed Books:</h5>
+    {% for book in books_reviewed %}
+      <a href = "/books/display/{{book.book.id}}">{{book.book.title}}</a>
+      <br>
+    {% endfor %}
+    
+  </div>
+</body>
+</html>

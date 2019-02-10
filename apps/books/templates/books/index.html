@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  {% load static %}
+  <link rel = "stylesheet" href = "{% static 'books/css/main.css' %}">
+  <title>Home</title>
+</head>
+<body>
+  <div class="jumbotron">
+     <h3>Welcome {{user_username}}</h3>
+     <nav class = "navbar navbar-expand-md navbar-light bg-light">
+       <a class = "navbar-nav mr-auto" href = "{% url 'books:add' %}"><button class="btn btn-primary">Add Book and Review</button></a>
+        <a class = "navbar-nav ml-auto"href = "{% url 'users:logout' %}"><button class="btn btn-primary">Logout</button></a>
+     </nav>
+     <br>
+    <h4>Recent Reviews</h4>
+    {% for review in reviews %}
+      <p><a href = "{% url 'books:display' review.book.id %}">{{review.book.title}}</a> {{review.review}} - <a href = "/books/show/{{review.user.id}}">{{review.user.username}}</a></p>
+    {% endfor %}
+    <br>
+    <h5>Books with Reviews</h5>
+    {% for book in books %}
+      <a href = "/books/display/{{ book.id }} ">{{ book.title }}</a>
+      <br>
+    {% endfor %}
+    <br>
+   
+   
+    
+  </div>
+</body>
+</html>
